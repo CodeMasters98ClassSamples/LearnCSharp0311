@@ -1,27 +1,33 @@
-﻿using LearnCSharp0311.Entities;
+﻿using LearnCSharp0311.Businesses;
+using LearnCSharp0311.Entities;
 
 namespace LearnCSharp0311
 {
     public partial class Form1 : Form
     {
-        List<Student> students = new List<Student>();
+        StudentBusiness studentBusiness = null;
         public Form1()
         {
             InitializeComponent();
 
+            studentBusiness = new StudentBusiness();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            List<Student> students = studentBusiness.GetStudents();
+            for (int i = 0; i < students.Count; i++)
+            {
+                studentListBox.Items.Add(students[i].FullData);
+            }
         }
 
         private void addStudentButton_Click(object sender, EventArgs e)
         {
-            Student student2 = new Student();
-
             Student student = new Student(firstName: firstNameTextBox.Text,lastName: lastNameTextBox.Text);
-            
-            students.Add(student);
+            studentBusiness.AddStudent(student);
+
+            //students.Add(student);
             studentListBox.Items.Add(student.FullData);
 
             ResetRegistreationForm();

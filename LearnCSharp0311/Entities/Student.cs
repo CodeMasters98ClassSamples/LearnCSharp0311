@@ -29,6 +29,8 @@ internal class Student : User
         }
     }
 
+    public string Referer { get; set; }
+
     //public string GetFullData()
     //{
     //    return $"StudentName: {FirstName}";
