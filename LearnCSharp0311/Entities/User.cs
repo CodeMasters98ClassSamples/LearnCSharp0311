@@ -2,7 +2,7 @@
 
 namespace LearnCSharp0311.Entities;
 
-internal class User: IBaseEntity
+internal abstract class User: IBaseEntity
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
@@ -13,4 +13,5 @@ internal class User: IBaseEntity
     public DateTime CreateIn { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
+
 }

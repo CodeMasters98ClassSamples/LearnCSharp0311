@@ -17,6 +17,9 @@ namespace LearnCSharp0311.Businesses
 
         public List<Course> GetAll()
         {
+            Course course = new Course();
+            course.CourseType = Enums.CourseType.DEVELOPMENT;
+
             throw new NotImplementedException();
         }
     }
