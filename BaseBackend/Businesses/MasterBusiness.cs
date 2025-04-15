@@ -1,11 +1,9 @@
-﻿
-using LearnCSharp0311.Entities;
-using LearnCSharp0311.Interfaces;
-using System.Diagnostics.Metrics;
+﻿using BaseBackend.Entities;
+using BaseBackend.Interfaces;
 
-namespace LearnCSharp0311.Businesses;
+namespace BaseBackend.Businesses;
 
-internal class MasterBusiness : IBaseBusiness<Master>
+public class MasterBusiness : IBaseBusiness<Master>
 {
     List<Master> masters = new List<Master>();
 

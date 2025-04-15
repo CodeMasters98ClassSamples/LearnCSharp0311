@@ -1,9 +1,9 @@
-﻿using LearnCSharp0311.Enums;
-using LearnCSharp0311.Interfaces;
+﻿using BaseBackend.Enums;
+using BaseBackend.Interfaces;
 
-namespace LearnCSharp0311.Entities;
+namespace BaseBackend.Entities;
 
-internal class Course: IBaseEntity
+public class Course: IBaseEntity
 {
     public int Id { get; set; }
 

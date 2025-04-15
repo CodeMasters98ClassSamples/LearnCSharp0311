@@ -24,7 +24,7 @@ namespace LearnCSharp0311
             Student student = new Student(firstName: "", lastName: "");
 
             StudentBusiness studentBusiness = new StudentBusiness();
-            studentBusiness.AddStudent(student);
+            //studentBusiness.AddStudent(student);
 
         }
     }

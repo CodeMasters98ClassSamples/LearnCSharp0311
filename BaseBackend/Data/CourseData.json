@@ -1,0 +1,20 @@
+[
+  {
+    "Id": 1,
+    "CourseType": 1,
+    "Title": "Programming In CSharp",
+    "Description": "You will learn c#",
+    "Amount": 100,
+    "Discount": 0,
+    "IsActive": 1
+  },
+  {
+    "Id": 2,
+    "CourseType": 1,
+    "Title": ".NET Fandamental",
+    "Description": "You will learn c#",
+    "Amount": 80,
+    "Discount": 0,
+    "IsActive": 1
+  }
+]

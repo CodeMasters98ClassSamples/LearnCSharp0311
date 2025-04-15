@@ -1,4 +1,4 @@
-﻿namespace LearnCSharp0311.Enums;
+﻿namespace BaseBackend.Enums;
 
 public enum CourseType
 {

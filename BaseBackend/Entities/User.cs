@@ -1,13 +1,20 @@
-﻿using LearnCSharp0311.Interfaces;
+﻿using BaseBackend.Interfaces;
 
-namespace LearnCSharp0311.Entities;
+namespace BaseBackend.Entities;
 
-internal abstract class User: IBaseEntity
+public abstract class User : IBaseEntity
 {
     public int Id { get; set; }
     public string FirstName { get; set; }
     public string LastName { get; set; }
     public DateTime BirthDate { get; set; }
+    public int Age
+    {
+        get
+        {
+            return 1;
+        }
+    }
     public string NationalCode { get; set; }
     public string MobileNumber { get; set; }
     public DateTime CreateIn { get; set; }

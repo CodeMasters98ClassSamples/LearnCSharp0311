@@ -1,9 +1,9 @@
-﻿using LearnCSharp0311.Entities;
-using LearnCSharp0311.Interfaces;
+﻿using BaseBackend.Entities;
+using BaseBackend.Interfaces;
 
-namespace LearnCSharp0311.Businesses;
+namespace BaseBackend.Businesses;
 
-internal class StudentBusiness : IBaseBusiness<Student>
+public class StudentBusiness : IBaseBusiness<Student>
 {
     List<Student> students = new List<Student>();
     public StudentBusiness()

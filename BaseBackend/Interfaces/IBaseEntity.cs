@@ -1,7 +1,6 @@
-﻿
-namespace LearnCSharp0311.Entities;
+﻿namespace BaseBackend.Interfaces;
 
-internal abstract class BaseEntity
+public interface IBaseEntity
 {
     public int Id { get; set; }
     public DateTime CreateIn { get; set; }

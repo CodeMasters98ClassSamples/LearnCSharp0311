@@ -1,8 +1,8 @@
 ﻿using LearnCSharp0311.Entities;
 
-namespace LearnCSharp0311.Interfaces;
+namespace BaseBackend.Interfaces;
 
-internal interface IBaseBusiness<T>
+public interface IBaseBusiness<T>
 {
     void Add(T item);
     List<T> GetAll();

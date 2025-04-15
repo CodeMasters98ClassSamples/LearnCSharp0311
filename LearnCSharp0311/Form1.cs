@@ -1,4 +1,5 @@
-﻿using LearnCSharp0311.Businesses;
+﻿using BaseBackend.Entities;
+using LearnCSharp0311.Businesses;
 using LearnCSharp0311.Entities;
 
 namespace LearnCSharp0311
@@ -9,13 +10,12 @@ namespace LearnCSharp0311
         public Form1()
         {
             InitializeComponent();
-
             studentBusiness = new StudentBusiness();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            List<Student> students = studentBusiness.GetStudents();
+            List<Student> students = studentBusiness.GetAll();
             for (int i = 0; i < students.Count; i++)
             {
                 studentListBox.Items.Add(students[i].FullData);
@@ -24,8 +24,9 @@ namespace LearnCSharp0311
 
         private void addStudentButton_Click(object sender, EventArgs e)
         {
+            StudentCourse studentCourse = new StudentCourse();
             Student student = new Student(firstName: firstNameTextBox.Text,lastName: lastNameTextBox.Text);
-            studentBusiness.AddStudent(student);
+            studentBusiness.Add(student);
 
             //students.Add(student);
             studentListBox.Items.Add(student.FullData);

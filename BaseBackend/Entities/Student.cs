@@ -1,7 +1,7 @@
 ﻿
-namespace LearnCSharp0311.Entities;
+namespace BaseBackend.Entities;
 
-internal class Student : User
+public class Student : User
 {
     public Student()
     {
