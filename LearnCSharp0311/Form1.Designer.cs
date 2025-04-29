@@ -40,33 +40,36 @@
             studentDataGridView = new DataGridView();
             updateStudentButton = new Button();
             deleteStudentButton = new Button();
+            label1 = new Label();
+            selectedIdTextBox = new TextBox();
+            resetButton = new Button();
             ((System.ComponentModel.ISupportInitialize)studentDataGridView).BeginInit();
             SuspendLayout();
             // 
             // firstNameTextBox
             // 
-            firstNameTextBox.Location = new Point(117, 12);
+            firstNameTextBox.Location = new Point(114, 50);
             firstNameTextBox.Name = "firstNameTextBox";
             firstNameTextBox.Size = new Size(178, 23);
             firstNameTextBox.TabIndex = 0;
             // 
             // lastNameTextBox
             // 
-            lastNameTextBox.Location = new Point(117, 41);
+            lastNameTextBox.Location = new Point(114, 79);
             lastNameTextBox.Name = "lastNameTextBox";
             lastNameTextBox.Size = new Size(178, 23);
             lastNameTextBox.TabIndex = 1;
             // 
             // mobileNumberTextBox
             // 
-            mobileNumberTextBox.Location = new Point(117, 70);
+            mobileNumberTextBox.Location = new Point(114, 108);
             mobileNumberTextBox.Name = "mobileNumberTextBox";
             mobileNumberTextBox.Size = new Size(178, 23);
             mobileNumberTextBox.TabIndex = 2;
             // 
             // nationalCodeTextBox
             // 
-            nationalCodeTextBox.Location = new Point(117, 99);
+            nationalCodeTextBox.Location = new Point(114, 137);
             nationalCodeTextBox.Name = "nationalCodeTextBox";
             nationalCodeTextBox.Size = new Size(178, 23);
             nationalCodeTextBox.TabIndex = 3;
@@ -74,7 +77,7 @@
             // firstNameLabel
             // 
             firstNameLabel.AutoSize = true;
-            firstNameLabel.Location = new Point(20, 15);
+            firstNameLabel.Location = new Point(17, 53);
             firstNameLabel.Name = "firstNameLabel";
             firstNameLabel.Size = new Size(67, 15);
             firstNameLabel.TabIndex = 4;
@@ -83,7 +86,7 @@
             // lastNameLabel
             // 
             lastNameLabel.AutoSize = true;
-            lastNameLabel.Location = new Point(20, 46);
+            lastNameLabel.Location = new Point(17, 84);
             lastNameLabel.Name = "lastNameLabel";
             lastNameLabel.Size = new Size(66, 15);
             lastNameLabel.TabIndex = 5;
@@ -92,7 +95,7 @@
             // mobileNumberLabel
             // 
             mobileNumberLabel.AutoSize = true;
-            mobileNumberLabel.Location = new Point(20, 75);
+            mobileNumberLabel.Location = new Point(17, 113);
             mobileNumberLabel.Name = "mobileNumberLabel";
             mobileNumberLabel.Size = new Size(91, 15);
             mobileNumberLabel.TabIndex = 6;
@@ -101,7 +104,7 @@
             // nationalCodelabel
             // 
             nationalCodelabel.AutoSize = true;
-            nationalCodelabel.Location = new Point(20, 102);
+            nationalCodelabel.Location = new Point(17, 140);
             nationalCodelabel.Name = "nationalCodelabel";
             nationalCodelabel.Size = new Size(83, 15);
             nationalCodelabel.TabIndex = 7;
@@ -109,7 +112,7 @@
             // 
             // addStudentButton
             // 
-            addStudentButton.Location = new Point(12, 128);
+            addStudentButton.Location = new Point(9, 166);
             addStudentButton.Name = "addStudentButton";
             addStudentButton.Size = new Size(283, 37);
             addStudentButton.TabIndex = 8;
@@ -120,15 +123,16 @@
             // studentDataGridView
             // 
             studentDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            studentDataGridView.Location = new Point(301, 12);
+            studentDataGridView.Location = new Point(298, 12);
             studentDataGridView.Name = "studentDataGridView";
-            studentDataGridView.Size = new Size(487, 426);
+            studentDataGridView.Size = new Size(487, 441);
             studentDataGridView.TabIndex = 10;
+            studentDataGridView.CellClick += studentDataGridView_CellClick;
             // 
             // updateStudentButton
             // 
             updateStudentButton.FlatStyle = FlatStyle.System;
-            updateStudentButton.Location = new Point(12, 171);
+            updateStudentButton.Location = new Point(9, 209);
             updateStudentButton.Name = "updateStudentButton";
             updateStudentButton.Size = new Size(283, 37);
             updateStudentButton.TabIndex = 11;
@@ -139,7 +143,7 @@
             // deleteStudentButton
             // 
             deleteStudentButton.FlatStyle = FlatStyle.System;
-            deleteStudentButton.Location = new Point(12, 214);
+            deleteStudentButton.Location = new Point(9, 252);
             deleteStudentButton.Name = "deleteStudentButton";
             deleteStudentButton.Size = new Size(283, 37);
             deleteStudentButton.TabIndex = 12;
@@ -147,11 +151,41 @@
             deleteStudentButton.UseVisualStyleBackColor = true;
             deleteStudentButton.Click += deleteStudentButton_Click;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(17, 25);
+            label1.Name = "label1";
+            label1.Size = new Size(64, 15);
+            label1.TabIndex = 13;
+            label1.Text = "SelectedId:";
+            // 
+            // selectedIdTextBox
+            // 
+            selectedIdTextBox.Location = new Point(114, 22);
+            selectedIdTextBox.Name = "selectedIdTextBox";
+            selectedIdTextBox.ReadOnly = true;
+            selectedIdTextBox.Size = new Size(178, 23);
+            selectedIdTextBox.TabIndex = 14;
+            // 
+            // resetButton
+            // 
+            resetButton.Location = new Point(9, 295);
+            resetButton.Name = "resetButton";
+            resetButton.Size = new Size(283, 37);
+            resetButton.TabIndex = 15;
+            resetButton.Text = "Rest Form";
+            resetButton.UseVisualStyleBackColor = true;
+            resetButton.Click += resetButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(800, 494);
+            Controls.Add(resetButton);
+            Controls.Add(selectedIdTextBox);
+            Controls.Add(label1);
             Controls.Add(deleteStudentButton);
             Controls.Add(updateStudentButton);
             Controls.Add(studentDataGridView);
@@ -186,5 +220,8 @@
         private DataGridView studentDataGridView;
         private Button updateStudentButton;
         private Button deleteStudentButton;
+        private Label label1;
+        private TextBox selectedIdTextBox;
+        private Button resetButton;
     }
 }

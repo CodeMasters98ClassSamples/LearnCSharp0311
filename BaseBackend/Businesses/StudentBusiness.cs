@@ -13,10 +13,11 @@ public class StudentBusiness : IBaseBusiness<Student>
     {
     }
 
-    public void Add(Student item)
+    public bool Add(Student item)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
+            bool isAffected = false;
             try
             {
                 connection.Open();
@@ -37,7 +38,7 @@ public class StudentBusiness : IBaseBusiness<Student>
                 // Execute the insert query
                 int rowsAffected = command.ExecuteNonQuery();
 
-                bool isAffected = rowsAffected > 0;
+                isAffected = rowsAffected > 0;
             }
             catch (Exception ex)
             {
@@ -47,6 +48,7 @@ public class StudentBusiness : IBaseBusiness<Student>
             {
                 connection.Close();
             }
+            return isAffected;
         }
     }
 
@@ -66,7 +68,7 @@ public class StudentBusiness : IBaseBusiness<Student>
 
                 //Step 3
                 // Create a SQL command to select data from the table
-                string query = $"SELECT Id,FirstName, LastName, PhoneNumber FROM {tableName}";
+                string query = $"SELECT Id,FirstName, LastName, PhoneNumber, NationalCode FROM {tableName}";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 //sTEP 4
@@ -82,7 +84,9 @@ public class StudentBusiness : IBaseBusiness<Student>
                     {
                         Id = (int)reader["Id"],
                         FirstName = reader["FirstName"].ToString(),
-                        LastName = reader["LastName"].ToString()
+                        LastName = reader["LastName"].ToString(),
+                        MobileNumber = reader["PhoneNumber"].ToString(),
+                        NationalCode = reader["NationalCode"].ToString()
                     };
                     //Step 7
                     students.Add(student);
@@ -103,4 +107,48 @@ public class StudentBusiness : IBaseBusiness<Student>
         }
     }
 
+    public bool Update(Student item)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            bool isAffected = false;
+            try
+            {
+                connection.Open();
+
+                string tableName = "[User]";
+
+                // Create a SQL command to insert a new person record
+                string query =  "UPDATE dbo.[User] " +
+                                "SET FirstName = @FirstName, " +
+                                    "LastName = @LastName," +
+                                    "PhoneNumber = @PhoneNumber," +
+                                    "NationalCode = @NationalCode " +
+                                "WHERE Id = @Id";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Add parameters to the SQL command
+                //command.Parameters.AddWithValue("@Id", person.Id);
+                command.Parameters.AddWithValue("@FirstName", item.FirstName);
+                command.Parameters.AddWithValue("@LastName", item.LastName);
+                command.Parameters.AddWithValue("@PhoneNumber", item.MobileNumber);
+                command.Parameters.AddWithValue("@NationalCode", item.NationalCode);
+                command.Parameters.AddWithValue("@Id", item.Id);
+
+                // Execute the insert query
+                int rowsAffected = command.ExecuteNonQuery();
+
+                isAffected = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isAffected;
+        }
+    }
 }

@@ -2,6 +2,7 @@
 
 public interface IBaseBusiness<T>
 {
-    void Add(T item);
+    bool Add(T item);
     List<T> GetAll();
+    bool Update(T item);
 }

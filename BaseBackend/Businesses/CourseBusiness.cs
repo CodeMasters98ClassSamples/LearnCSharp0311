@@ -6,7 +6,7 @@ namespace BaseBackend.Businesses
 {
     public class CourseBusiness : IBaseBusiness<Course>
     {
-        public void Add(Course item)
+        public bool Add(Course item)
         {
             throw new NotImplementedException();
         }
@@ -18,5 +18,11 @@ namespace BaseBackend.Businesses
             List<Course> courses = JsonConvert.DeserializeObject<List<Course>>(jsonDataStr);
             return courses;
         }
+
+        public bool Update(Course item)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

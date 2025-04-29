@@ -1,5 +1,6 @@
 ﻿using BaseBackend.Businesses;
 using BaseBackend.Entities;
+using System.Windows.Forms;
 
 namespace LearnCSharp0311
 {
@@ -21,6 +22,19 @@ namespace LearnCSharp0311
 
         private void addStudentButton_Click(object sender, EventArgs e)
         {
+            if (!string.IsNullOrEmpty(selectedIdTextBox.Text))
+            {
+                MessageBox.Show("Please Reset Form");
+                return;
+            }
+
+            if (string.IsNullOrEmpty(firstNameTextBox.Text) ||
+                string.IsNullOrEmpty(lastNameTextBox.Text) || 
+                string.IsNullOrEmpty(mobileNumberTextBox.Text))
+            {
+                MessageBox.Show("Please enter all values");
+                return;
+            }
             StudentCourse studentCourse = new StudentCourse();
             Student student = new Student(firstName: firstNameTextBox.Text, lastName: lastNameTextBox.Text, mobileNumber: mobileNumberTextBox.Text);
             studentBusiness.Add(student);
@@ -42,11 +56,50 @@ namespace LearnCSharp0311
 
         private void updateStudentButton_Click(object sender, EventArgs e)
         {
-            //Code
+            Student student = new Student()
+            {
+                Id = int.Parse(selectedIdTextBox.Text),
+                FirstName = firstNameTextBox.Text,
+                LastName = lastNameTextBox.Text,
+                MobileNumber = mobileNumberTextBox.Text,
+                NationalCode = nationalCodeTextBox.Text
+            };
+            studentBusiness.Update(student);
+
+            List<Student> students = studentBusiness.GetAll();
+            studentDataGridView.DataSource = students;
+            studentDataGridView.Refresh();
         }
 
         private void deleteStudentButton_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void studentDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Ignore header row clicks
+            if (e.RowIndex >= 0)
+            {
+                // Get the current row
+                var row = studentDataGridView.Rows[e.RowIndex];
+
+                // Access the ID from the row's data
+                var id = row.Cells["Id"].Value;
+
+                // Display or use the ID
+                selectedIdTextBox.Text = id.ToString();
+                firstNameTextBox.Text = row.Cells["FirstName"].Value?.ToString();
+                lastNameTextBox.Text = row.Cells["LastName"].Value?.ToString();
+                mobileNumberTextBox.Text = row.Cells["MobileNumber"].Value?.ToString();
+                nationalCodeTextBox.Text = row.Cells["NationalCode"].Value?.ToString();
+            }
+        }
+
+        private void resetButton_Click(object sender, EventArgs e)
+        {
+            ResetRegistreationForm();
+            selectedIdTextBox.Text = null;
 
         }
     }
