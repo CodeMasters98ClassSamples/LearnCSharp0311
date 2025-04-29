@@ -1,26 +1,106 @@
 ﻿using BaseBackend.Entities;
 using BaseBackend.Interfaces;
+using System;
+using System.Data.SqlClient;
 
 namespace BaseBackend.Businesses;
 
 public class StudentBusiness : IBaseBusiness<Student>
 {
-    List<Student> students = new List<Student>();
+    const string connectionString = "Data Source=.;Initial Catalog=BookShop;Integrated Security=True;";
+
     public StudentBusiness()
     {
-        students.Add(new Student() { FirstName = "st-fs-1", LastName= "st-ls-1"});
-        students.Add(new Student() { FirstName = "st-fs-2", LastName = "st-ls-2" });
     }
 
     public void Add(Student item)
     {
-        students.Add(item);
-    }
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
 
+                string tableName = "[User]";
+
+                // Create a SQL command to insert a new person record
+                string query = $"INSERT INTO {tableName} (FirstName, LastName, PhoneNumber) " +
+                               "VALUES (@FirstName, @LastName, @PhoneNumber)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Add parameters to the SQL command
+                //command.Parameters.AddWithValue("@Id", person.Id);
+                command.Parameters.AddWithValue("@FirstName", item.FirstName);
+                command.Parameters.AddWithValue("@LastName", item.LastName);
+                command.Parameters.AddWithValue("@PhoneNumber", item.MobileNumber);
+
+                // Execute the insert query
+                int rowsAffected = command.ExecuteNonQuery();
+
+                bool isAffected = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+    }
 
     public List<Student> GetAll()
     {
-        return students;
+        //Step 1
+        List<Student> students = new List<Student>();
+
+        //Step2
+        // Replace "YourTableName" with the actual name of the table you want to query
+        string tableName = "[User]";
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            try
+            {
+                connection.Open();
+
+                //Step 3
+                // Create a SQL command to select data from the table
+                string query = $"SELECT Id,FirstName, LastName, PhoneNumber FROM {tableName}";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                //sTEP 4
+                // Create a data reader to fetch the data
+                SqlDataReader reader = command.ExecuteReader();
+
+                // Read data and map it to Person objects
+                //Step 5
+                while (reader.Read())
+                {
+                    //Step 6
+                    Student student = new Student
+                    {
+                        Id = (int)reader["Id"],
+                        FirstName = reader["FirstName"].ToString(),
+                        LastName = reader["LastName"].ToString()
+                    };
+                    //Step 7
+                    students.Add(student);
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                //Step 8
+                connection.Close();
+            }
+            //Stpe 9
+            return students;
+        }
     }
 
 }

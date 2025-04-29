@@ -1,6 +1,4 @@
-﻿using LearnCSharp0311.Entities;
-
-namespace BaseBackend.Interfaces;
+﻿namespace BaseBackend.Interfaces;
 
 public interface IBaseBusiness<T>
 {

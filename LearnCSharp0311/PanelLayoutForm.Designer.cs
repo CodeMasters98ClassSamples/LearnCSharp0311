@@ -31,9 +31,10 @@
             menuStrip1 = new MenuStrip();
             studentManagmentToolStripMenuItem = new ToolStripMenuItem();
             courseManagementToolStripMenuItem = new ToolStripMenuItem();
-            registerOnCourseToolStripMenuItem = new ToolStripMenuItem();
             courseToolStripMenuItem = new ToolStripMenuItem();
             courseListToolStripMenuItem = new ToolStripMenuItem();
+            registerOnCourseToolStripMenuItem = new ToolStripMenuItem();
+            studentManagmentToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -48,9 +49,11 @@
             // 
             // studentManagmentToolStripMenuItem
             // 
+            studentManagmentToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { studentManagmentToolStripMenuItem1 });
             studentManagmentToolStripMenuItem.Name = "studentManagmentToolStripMenuItem";
             studentManagmentToolStripMenuItem.Size = new Size(128, 20);
             studentManagmentToolStripMenuItem.Text = "Student Managment";
+            studentManagmentToolStripMenuItem.Click += studentManagmentToolStripMenuItem_Click;
             // 
             // courseManagementToolStripMenuItem
             // 
@@ -59,24 +62,31 @@
             courseManagementToolStripMenuItem.Size = new Size(130, 20);
             courseManagementToolStripMenuItem.Text = "Course Management";
             // 
+            // courseToolStripMenuItem
+            // 
+            courseToolStripMenuItem.Name = "courseToolStripMenuItem";
+            courseToolStripMenuItem.Size = new Size(129, 22);
+            courseToolStripMenuItem.Text = "Course";
+            // 
+            // courseListToolStripMenuItem
+            // 
+            courseListToolStripMenuItem.Name = "courseListToolStripMenuItem";
+            courseListToolStripMenuItem.Size = new Size(129, 22);
+            courseListToolStripMenuItem.Text = "CourseList";
+            courseListToolStripMenuItem.Click += courseListToolStripMenuItem_Click;
+            // 
             // registerOnCourseToolStripMenuItem
             // 
             registerOnCourseToolStripMenuItem.Name = "registerOnCourseToolStripMenuItem";
             registerOnCourseToolStripMenuItem.Size = new Size(114, 20);
             registerOnCourseToolStripMenuItem.Text = "RegisterOnCourse";
             // 
-            // courseToolStripMenuItem
+            // studentManagmentToolStripMenuItem1
             // 
-            courseToolStripMenuItem.Name = "courseToolStripMenuItem";
-            courseToolStripMenuItem.Size = new Size(180, 22);
-            courseToolStripMenuItem.Text = "Course";
-            // 
-            // courseListToolStripMenuItem
-            // 
-            courseListToolStripMenuItem.Name = "courseListToolStripMenuItem";
-            courseListToolStripMenuItem.Size = new Size(180, 22);
-            courseListToolStripMenuItem.Text = "CourseList";
-            courseListToolStripMenuItem.Click += courseListToolStripMenuItem_Click;
+            studentManagmentToolStripMenuItem1.Name = "studentManagmentToolStripMenuItem1";
+            studentManagmentToolStripMenuItem1.Size = new Size(180, 22);
+            studentManagmentToolStripMenuItem1.Text = "StudentManagment";
+            studentManagmentToolStripMenuItem1.Click += studentManagmentToolStripMenuItem1_Click;
             // 
             // PanelLayoutForm
             // 
@@ -101,5 +111,6 @@
         private ToolStripMenuItem courseToolStripMenuItem;
         private ToolStripMenuItem courseListToolStripMenuItem;
         private ToolStripMenuItem registerOnCourseToolStripMenuItem;
+        private ToolStripMenuItem studentManagmentToolStripMenuItem1;
     }
 }

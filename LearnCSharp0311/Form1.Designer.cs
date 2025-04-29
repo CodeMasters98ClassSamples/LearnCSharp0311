@@ -37,35 +37,38 @@
             mobileNumberLabel = new Label();
             nationalCodelabel = new Label();
             addStudentButton = new Button();
-            studentListBox = new ListBox();
+            studentDataGridView = new DataGridView();
+            updateStudentButton = new Button();
+            deleteStudentButton = new Button();
+            ((System.ComponentModel.ISupportInitialize)studentDataGridView).BeginInit();
             SuspendLayout();
             // 
             // firstNameTextBox
             // 
-            firstNameTextBox.Location = new Point(110, 12);
+            firstNameTextBox.Location = new Point(117, 12);
             firstNameTextBox.Name = "firstNameTextBox";
-            firstNameTextBox.Size = new Size(185, 23);
+            firstNameTextBox.Size = new Size(178, 23);
             firstNameTextBox.TabIndex = 0;
             // 
             // lastNameTextBox
             // 
-            lastNameTextBox.Location = new Point(110, 41);
+            lastNameTextBox.Location = new Point(117, 41);
             lastNameTextBox.Name = "lastNameTextBox";
-            lastNameTextBox.Size = new Size(185, 23);
+            lastNameTextBox.Size = new Size(178, 23);
             lastNameTextBox.TabIndex = 1;
             // 
             // mobileNumberTextBox
             // 
-            mobileNumberTextBox.Location = new Point(110, 70);
+            mobileNumberTextBox.Location = new Point(117, 70);
             mobileNumberTextBox.Name = "mobileNumberTextBox";
-            mobileNumberTextBox.Size = new Size(185, 23);
+            mobileNumberTextBox.Size = new Size(178, 23);
             mobileNumberTextBox.TabIndex = 2;
             // 
             // nationalCodeTextBox
             // 
-            nationalCodeTextBox.Location = new Point(110, 99);
+            nationalCodeTextBox.Location = new Point(117, 99);
             nationalCodeTextBox.Name = "nationalCodeTextBox";
-            nationalCodeTextBox.Size = new Size(185, 23);
+            nationalCodeTextBox.Size = new Size(178, 23);
             nationalCodeTextBox.TabIndex = 3;
             // 
             // firstNameLabel
@@ -108,27 +111,50 @@
             // 
             addStudentButton.Location = new Point(12, 128);
             addStudentButton.Name = "addStudentButton";
-            addStudentButton.Size = new Size(283, 31);
+            addStudentButton.Size = new Size(283, 37);
             addStudentButton.TabIndex = 8;
             addStudentButton.Text = "Add Student";
             addStudentButton.UseVisualStyleBackColor = true;
             addStudentButton.Click += addStudentButton_Click;
             // 
-            // studentListBox
+            // studentDataGridView
             // 
-            studentListBox.FormattingEnabled = true;
-            studentListBox.ItemHeight = 15;
-            studentListBox.Location = new Point(12, 165);
-            studentListBox.Name = "studentListBox";
-            studentListBox.Size = new Size(283, 274);
-            studentListBox.TabIndex = 9;
+            studentDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            studentDataGridView.Location = new Point(301, 12);
+            studentDataGridView.Name = "studentDataGridView";
+            studentDataGridView.Size = new Size(487, 426);
+            studentDataGridView.TabIndex = 10;
+            // 
+            // updateStudentButton
+            // 
+            updateStudentButton.FlatStyle = FlatStyle.System;
+            updateStudentButton.Location = new Point(12, 171);
+            updateStudentButton.Name = "updateStudentButton";
+            updateStudentButton.Size = new Size(283, 37);
+            updateStudentButton.TabIndex = 11;
+            updateStudentButton.Text = "Update Student";
+            updateStudentButton.UseVisualStyleBackColor = true;
+            updateStudentButton.Click += updateStudentButton_Click;
+            // 
+            // deleteStudentButton
+            // 
+            deleteStudentButton.FlatStyle = FlatStyle.System;
+            deleteStudentButton.Location = new Point(12, 214);
+            deleteStudentButton.Name = "deleteStudentButton";
+            deleteStudentButton.Size = new Size(283, 37);
+            deleteStudentButton.TabIndex = 12;
+            deleteStudentButton.Text = "Delete Student";
+            deleteStudentButton.UseVisualStyleBackColor = true;
+            deleteStudentButton.Click += deleteStudentButton_Click;
             // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(studentListBox);
+            Controls.Add(deleteStudentButton);
+            Controls.Add(updateStudentButton);
+            Controls.Add(studentDataGridView);
             Controls.Add(addStudentButton);
             Controls.Add(nationalCodelabel);
             Controls.Add(mobileNumberLabel);
@@ -141,6 +167,7 @@
             Name = "Form1";
             Text = "Form1";
             Load += Form1_Load;
+            ((System.ComponentModel.ISupportInitialize)studentDataGridView).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -156,6 +183,8 @@
         private Label mobileNumberLabel;
         private Label nationalCodelabel;
         private Button addStudentButton;
-        private ListBox studentListBox;
+        private DataGridView studentDataGridView;
+        private Button updateStudentButton;
+        private Button deleteStudentButton;
     }
 }

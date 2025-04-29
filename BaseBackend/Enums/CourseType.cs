@@ -1,6 +1,6 @@
 ﻿namespace BaseBackend.Enums;
 
-public enum CourseType
+public enum CourseType : int
 {
     NONE = 0,
     DEVELOPMENT = 1,

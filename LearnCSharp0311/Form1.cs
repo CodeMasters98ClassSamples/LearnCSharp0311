@@ -1,6 +1,5 @@
-﻿using BaseBackend.Entities;
-using LearnCSharp0311.Businesses;
-using LearnCSharp0311.Entities;
+﻿using BaseBackend.Businesses;
+using BaseBackend.Entities;
 
 namespace LearnCSharp0311
 {
@@ -16,20 +15,19 @@ namespace LearnCSharp0311
         private void Form1_Load(object sender, EventArgs e)
         {
             List<Student> students = studentBusiness.GetAll();
-            for (int i = 0; i < students.Count; i++)
-            {
-                studentListBox.Items.Add(students[i].FullData);
-            }
+            studentDataGridView.DataSource = students;
+            studentDataGridView.Refresh();
         }
 
         private void addStudentButton_Click(object sender, EventArgs e)
         {
             StudentCourse studentCourse = new StudentCourse();
-            Student student = new Student(firstName: firstNameTextBox.Text,lastName: lastNameTextBox.Text);
+            Student student = new Student(firstName: firstNameTextBox.Text, lastName: lastNameTextBox.Text, mobileNumber: mobileNumberTextBox.Text);
             studentBusiness.Add(student);
 
-            //students.Add(student);
-            studentListBox.Items.Add(student.FullData);
+            List<Student> students = studentBusiness.GetAll();
+            studentDataGridView.DataSource = students;
+            studentDataGridView.Refresh();
 
             ResetRegistreationForm();
         }
@@ -40,6 +38,16 @@ namespace LearnCSharp0311
             lastNameTextBox.Text = null;
             mobileNumberTextBox.Text = null;
             nationalCodeTextBox.Text = null;
+        }
+
+        private void updateStudentButton_Click(object sender, EventArgs e)
+        {
+            //Code
+        }
+
+        private void deleteStudentButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
