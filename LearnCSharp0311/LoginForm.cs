@@ -1,4 +1,5 @@
 ﻿using BaseBackend.Dtos;
+using Microsoft.VisualBasic.Logging;
 using Newtonsoft.Json;
 
 namespace LearnCSharp0311;
@@ -29,19 +30,42 @@ public partial class LoginForm : Form
         }
 
         //List -> Item
-        foreach (var login in validLogins)
+        //Before C# Version 2
+        //foreach (var login in validLogins)
+        //{
+        //    if (username.ToLower() == login.Username.ToLower() && password == login.Password)
+        //    {
+        //        //Login Successfully -> Redirect
+        //        PanelLayoutForm panelLayoutForm = new PanelLayoutForm();
+        //        panelLayoutForm.ShowDialog();
+        //        return;
+        //    }
+        //}
+
+        //LoginDto loginDto = validLogins.Where(x => x.Username == username && x.Password == password).FirstOrDefault();
+        //if (loginDto is not null)
+        //{
+        //    PanelLayoutForm panelLayoutForm = new PanelLayoutForm();
+        //    panelLayoutForm.ShowDialog();
+        //}
+        //else
+        //{
+        //    MessageBox.Show(text: "Please enter valid username or password!", caption: "Invalid Login information");
+        //    ResetLoginForm();
+        //}
+
+        //After C# Version 3
+        if (validLogins.Any(x => x.Username == username && x.Password == password))
         {
-            if (username.ToLower() == login.Username.ToLower() && password == login.Password)
-            {
-                //Login Successfully -> Redirect
-                PanelLayoutForm panelLayoutForm = new PanelLayoutForm();
-                panelLayoutForm.ShowDialog();
-                return;
-            }
+            PanelLayoutForm panelLayoutForm = new PanelLayoutForm();
+            panelLayoutForm.ShowDialog();
+        }
+        else
+        {
+            MessageBox.Show(text: "Please enter valid username or password!", caption: "Invalid Login information");
+            ResetLoginForm();
         }
 
-        MessageBox.Show(text: "Please enter valid username or password!", caption: "Invalid Login information");
-        ResetLoginForm();
     }
 
     private void ResetLoginForm()
