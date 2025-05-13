@@ -2,9 +2,9 @@
 
 namespace BaseBackend.Entities;
 
-public class StudentCourse: IBaseEntity
+public class StudentCourse : IFullEntity<long>
 {
-    public int Id { get; set; }
+    public long Id { get; set; }
     public Course Course { get; set; }
     public Student Student { get; set; }
     public DateTime RejisterDate { get; set; }
@@ -17,7 +17,8 @@ public class StudentCourse: IBaseEntity
         get { return _currentAmount; }
     }
 
-    public DateTime CreateIn { get; set; }
+    public DateTime CreatedAt { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
+    public int UserId { get; set; }
 }

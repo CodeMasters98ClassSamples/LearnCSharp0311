@@ -1,28 +1,53 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using BaseBackend.Dtos;
+using Newtonsoft.Json;
 
-namespace LearnCSharp0311
+namespace LearnCSharp0311;
+
+public partial class LoginForm : Form
 {
-    public partial class LoginForm : Form
+    public List<LoginDto> validLogins;
+    public LoginForm()
     {
-        public LoginForm()
+        InitializeComponent();
+        string jsonDataStrFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+            "Data",
+            "LoginUsers.json");
+
+        string jsonDataStr = File.ReadAllText(jsonDataStrFilePath);
+        validLogins = JsonConvert.DeserializeObject<List<LoginDto>>(jsonDataStr);
+    }
+
+    private void addStudentButton_Click(object sender, EventArgs e)
+    {
+        string username = usernameTextBox.Text;
+        string password = passwordTextBox.Text;
+        if (string.IsNullOrEmpty(username) || string.IsNullOrEmpty(password))
         {
-            InitializeComponent();
+            MessageBox.Show(text: "Please enter valid username or password!", caption: "Invalid Login information");
+            ResetLoginForm();
+            return;
         }
 
-        private void addStudentButton_Click(object sender, EventArgs e)
+        //List -> Item
+        foreach (var login in validLogins)
         {
-            if (usernameTextBox.Text == "" && passwordTextBox.Text == "")
+            if (username.ToLower() == login.Username.ToLower() && password == login.Password)
             {
-                //Redirect to Panel
+                //Login Successfully -> Redirect
+                PanelLayoutForm panelLayoutForm = new PanelLayoutForm();
+                panelLayoutForm.ShowDialog();
+                return;
             }
         }
+
+        MessageBox.Show(text: "Please enter valid username or password!", caption: "Invalid Login information");
+        ResetLoginForm();
+    }
+
+    private void ResetLoginForm()
+    {
+        usernameTextBox.Text = string.Empty;
+        passwordTextBox.Text = string.Empty;
+
     }
 }

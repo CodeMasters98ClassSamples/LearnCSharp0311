@@ -1,9 +1,25 @@
 ﻿namespace BaseBackend.Interfaces;
 
-public interface IBaseEntity
+public interface IFullEntity<T> : IDeletableEntity, ICreateableEntity
 {
-    public int Id { get; set; }
-    public DateTime CreateIn { get; set; }
+    public T Id { get; set; }
+}
+
+public interface IAuditableEntity
+{
+    public int UserId { get; set; }
+    public DateTime UpdatedAt { get; set; }
+}
+
+public interface IDeletableEntity
+{
+    public int UserId { get; set; } // History of User
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
+}
+
+public interface ICreateableEntity
+{
+    public int UserId { get; set; }
+    public DateTime CreatedAt { get; set; }
 }
