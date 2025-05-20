@@ -3,9 +3,9 @@ using BaseBackend.Interfaces;
 
 namespace BaseBackend.Entities;
 
-public class Course: IBaseEntity
+public class Course : IFullEntity<short>
 {
-    public int Id { get; set; }
+    public short Id { get; set; }
     public CourseType CourseType { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }
@@ -13,7 +13,8 @@ public class Course: IBaseEntity
     public decimal Discount { get; set; }
     public bool IsActive { get; set; }
 
-    public DateTime CreateIn { get; set; }
+    public DateTime CreatedAt { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
+    public int UserId { get; set; }
 }

@@ -6,14 +6,38 @@ namespace LearnCSharp0311
 {
     public partial class Form1 : Form
     {
+        // Declare the Delegate.
+        public delegate void ReloadData();
+
+        // Declare the event.
+        public event ReloadData ReloadDataEvent;
+
         StudentBusiness studentBusiness = null;
         public Form1()
         {
             InitializeComponent();
             studentBusiness = new StudentBusiness();
+
+            if (true)
+                ReloadDataEvent += FillData;
+            else
+                ReloadDataEvent += FillSampleData;
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
+        {
+            ReloadDataEvent.Invoke();
+        }
+
+        public void FillData()
+        {
+            List<Student> students = studentBusiness.GetAll();
+            studentDataGridView.DataSource = students;
+            studentDataGridView.Refresh();
+        }
+
+        public void FillSampleData()
         {
             List<Student> students = studentBusiness.GetAll();
             studentDataGridView.DataSource = students;
@@ -39,9 +63,7 @@ namespace LearnCSharp0311
             Student student = new Student(firstName: firstNameTextBox.Text, lastName: lastNameTextBox.Text, mobileNumber: mobileNumberTextBox.Text);
             studentBusiness.Add(student);
 
-            List<Student> students = studentBusiness.GetAll();
-            studentDataGridView.DataSource = students;
-            studentDataGridView.Refresh();
+         
 
             ResetRegistreationForm();
         }
@@ -65,15 +87,12 @@ namespace LearnCSharp0311
                 NationalCode = nationalCodeTextBox.Text
             };
             studentBusiness.Update(student);
-
-            List<Student> students = studentBusiness.GetAll();
-            studentDataGridView.DataSource = students;
-            studentDataGridView.Refresh();
+            ReloadDataEvent.Invoke();
         }
 
         private void deleteStudentButton_Click(object sender, EventArgs e)
         {
-
+            ReloadDataEvent.Invoke();
         }
 
         private void studentDataGridView_CellClick(object sender, DataGridViewCellEventArgs e)

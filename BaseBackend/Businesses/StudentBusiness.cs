@@ -24,7 +24,6 @@ public class StudentBusiness : IBaseBusiness<Student>
             try
             {
                 connection.Open();
-
                 string tableName = "[User]";
 
                 // Create a SQL command to insert a new person record
