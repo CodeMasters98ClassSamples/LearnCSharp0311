@@ -1,13 +1,16 @@
 ﻿using BaseBackend.Entities;
 using BaseBackend.Interfaces;
 using System;
+using System.Configuration;
 using System.Data.SqlClient;
 
 namespace BaseBackend.Businesses;
 
 public class StudentBusiness : IBaseBusiness<Student>
 {
-    const string connectionString = "Data Source=.;Initial Catalog=BookShop;Integrated Security=True;";
+    //const string connectionString = "Data Source=.;Initial Catalog=BookShop;Integrated Security=True;";
+    string connectionString = ConfigurationManager.ConnectionStrings["LearnCSharp0311Db"].ToString();
+
 
     public StudentBusiness()
     {
@@ -52,7 +55,7 @@ public class StudentBusiness : IBaseBusiness<Student>
         }
     }
 
-    public List<Student> GetAll()
+    public List<Student> GetAll(string firstName, string lastname)
     {
         //Step 1
         List<Student> students = new List<Student>();
@@ -107,6 +110,11 @@ public class StudentBusiness : IBaseBusiness<Student>
         }
     }
 
+    public List<Student> GetAll()
+    {
+        return GetAll(firstName: null, lastname: null);
+    }
+
     public bool Update(Student item)
     {
         using (SqlConnection connection = new SqlConnection(connectionString))
@@ -117,7 +125,7 @@ public class StudentBusiness : IBaseBusiness<Student>
                 connection.Open();
 
                 // Create a SQL command to insert a new person record
-                string query =  "UPDATE dbo.[User] " +
+                string query = "UPDATE dbo.[User] " +
                                 "SET FirstName = @FirstName, " +
                                     "LastName = @LastName," +
                                     "PhoneNumber = @PhoneNumber," +
