@@ -6,7 +6,6 @@ namespace BaseBackend.Entities;
 public class Course : IFullEntity<short>
 {
     public short Id { get; set; }
-
     public CourseType CourseType { get; set; }
     public string Title { get; set; }
     public string Description { get; set; }

@@ -33,5 +33,11 @@ namespace LearnCSharp0311
             Form1 studentForm = new Form1();
             studentForm.ShowDialog();
         }
+
+        private void registerOnCourseToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            RegisterStudentForm form = new RegisterStudentForm();
+            form.ShowDialog();
+        }
     }
 }
