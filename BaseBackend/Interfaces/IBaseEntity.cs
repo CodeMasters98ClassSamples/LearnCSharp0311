@@ -13,13 +13,13 @@ public interface IAuditableEntity
 
 public interface IDeletableEntity
 {
-    public int UserId { get; set; } // History of User
+    public int DeletedByUserId { get; set; } // History of User
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
 }
 
 public interface ICreateableEntity
 {
-    public int UserId { get; set; }
+    public int CreatedByUserId { get; set; }
     public DateTime CreatedAt { get; set; }
 }

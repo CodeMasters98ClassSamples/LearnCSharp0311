@@ -11,7 +11,8 @@ public abstract class User : IFullEntity<int>
     public string NationalCode { get; set; }
     public string MobileNumber { get; set; }
     public DateTime CreatedAt { get; set; }
+    public int CreatedByUserId { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
-    public int UserId { get; set; }
+    public int DeletedByUserId { get; set; }
 }

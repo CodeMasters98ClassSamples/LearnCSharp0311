@@ -23,6 +23,15 @@ namespace LearnCSharp0311
             else
                 ReloadDataEvent += FillSampleData;
 
+
+            //ListCourses
+            CourseBusiness courseBusiness = new CourseBusiness();
+            List<Course> courses = courseBusiness.GetAll();
+            courseComboBox.Items.Clear();
+            foreach (var item in courses)
+            {
+                courseComboBox.Items.Add(item.Title);
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -53,7 +62,7 @@ namespace LearnCSharp0311
             }
 
             if (string.IsNullOrEmpty(firstNameTextBox.Text) ||
-                string.IsNullOrEmpty(lastNameTextBox.Text) || 
+                string.IsNullOrEmpty(lastNameTextBox.Text) ||
                 string.IsNullOrEmpty(mobileNumberTextBox.Text))
             {
                 MessageBox.Show("Please enter all values");
@@ -63,7 +72,7 @@ namespace LearnCSharp0311
             Student student = new Student(firstName: firstNameTextBox.Text, lastName: lastNameTextBox.Text, mobileNumber: mobileNumberTextBox.Text);
             studentBusiness.Add(student);
 
-         
+
 
             ResetRegistreationForm();
         }
@@ -120,6 +129,37 @@ namespace LearnCSharp0311
             ResetRegistreationForm();
             selectedIdTextBox.Text = null;
 
+        }
+
+        private void registerButton_Click(object sender, EventArgs e)
+        {
+            string courseTitle = courseComboBox.SelectedItem.ToString();
+            if (string.IsNullOrEmpty(courseTitle))
+            {
+                MessageBox.Show("Please select valid course");
+                return;
+            }
+
+            CourseBusiness courseBusiness = new CourseBusiness();
+            List<Course> courses = courseBusiness.GetAll();
+
+            Course course = courses.Where(x => x.Title == courseTitle).FirstOrDefault();
+
+            StudentCourse studentCourse = new StudentCourse()
+            {
+                StudentId = int.Parse(selectedIdTextBox.Text),
+                CurrentAmount = course.Amount,
+                CourseId = course.Id
+            };
+            bool result = studentBusiness.Register(studentCourse);
+            if (result)
+            {
+                MessageBox.Show("Registeration successed");
+            }
+            else
+            {
+                //...
+            }
         }
     }
 }

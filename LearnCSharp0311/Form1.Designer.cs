@@ -43,6 +43,9 @@
             label1 = new Label();
             selectedIdTextBox = new TextBox();
             resetButton = new Button();
+            courseComboBox = new ComboBox();
+            label2 = new Label();
+            registerButton = new Button();
             ((System.ComponentModel.ISupportInitialize)studentDataGridView).BeginInit();
             SuspendLayout();
             // 
@@ -125,7 +128,7 @@
             studentDataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             studentDataGridView.Location = new Point(298, 12);
             studentDataGridView.Name = "studentDataGridView";
-            studentDataGridView.Size = new Size(487, 441);
+            studentDataGridView.Size = new Size(487, 470);
             studentDataGridView.TabIndex = 10;
             studentDataGridView.CellClick += studentDataGridView_CellClick;
             // 
@@ -178,11 +181,41 @@
             resetButton.UseVisualStyleBackColor = true;
             resetButton.Click += resetButton_Click;
             // 
+            // courseComboBox
+            // 
+            courseComboBox.FormattingEnabled = true;
+            courseComboBox.Location = new Point(114, 349);
+            courseComboBox.Name = "courseComboBox";
+            courseComboBox.Size = new Size(178, 23);
+            courseComboBox.TabIndex = 16;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(32, 352);
+            label2.Name = "label2";
+            label2.Size = new Size(49, 15);
+            label2.TabIndex = 17;
+            label2.Text = "Courses";
+            // 
+            // registerButton
+            // 
+            registerButton.Location = new Point(9, 378);
+            registerButton.Name = "registerButton";
+            registerButton.Size = new Size(283, 37);
+            registerButton.TabIndex = 18;
+            registerButton.Text = "Register Course";
+            registerButton.UseVisualStyleBackColor = true;
+            registerButton.Click += registerButton_Click;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 494);
+            Controls.Add(registerButton);
+            Controls.Add(label2);
+            Controls.Add(courseComboBox);
             Controls.Add(resetButton);
             Controls.Add(selectedIdTextBox);
             Controls.Add(label1);
@@ -223,5 +256,8 @@
         private Label label1;
         private TextBox selectedIdTextBox;
         private Button resetButton;
+        private ComboBox courseComboBox;
+        private Label label2;
+        private Button registerButton;
     }
 }

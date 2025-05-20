@@ -29,6 +29,7 @@ public class Student : User
         }
     }
 
+    public string University { get; set; }
     public string Referer { get; set; }
 
     //public string GetFullData()

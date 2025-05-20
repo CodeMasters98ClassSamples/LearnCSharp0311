@@ -14,7 +14,9 @@ public class Course : IFullEntity<short>
     public bool IsActive { get; set; }
 
     public DateTime CreatedAt { get; set; }
+    public int CreatedByUserId { get; set; }
+
     public bool IsDeleted { get; set; }
     public DateTime DeletedAt { get; set; }
-    public int UserId { get; set; }
+    public int DeletedByUserId { get; set; }
 }

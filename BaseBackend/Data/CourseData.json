@@ -4,7 +4,7 @@
     "CourseType": 1,
     "Title": "Programming In CSharp",
     "Description": "You will learn c#",
-    "Amount": 100,
+    "Amount": 200000,
     "Discount": 0,
     "IsActive": 1
   },
@@ -13,7 +13,7 @@
     "CourseType": 1,
     "Title": ".NET Fandamental",
     "Description": "You will learn c#",
-    "Amount": 80,
+    "Amount": 50000,
     "Discount": 0,
     "IsActive": 1
   }

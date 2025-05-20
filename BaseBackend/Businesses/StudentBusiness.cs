@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace BaseBackend.Businesses;
 
-public class StudentBusiness : IBaseBusiness<Student>
+public class StudentBusiness : IBaseBusiness<Student>, IStudentBusiness<StudentCourse>
 {
     //const string connectionString = "Data Source=.;Initial Catalog=BookShop;Integrated Security=True;";
     string connectionString = ConfigurationManager.ConnectionStrings["LearnCSharp0311Db"].ToString();
@@ -61,7 +61,6 @@ public class StudentBusiness : IBaseBusiness<Student>
 
         //Step2
         // Replace "YourTableName" with the actual name of the table you want to query
-        string tableName = "[User]";
         using (SqlConnection connection = new SqlConnection(connectionString))
         {
             try
@@ -70,7 +69,7 @@ public class StudentBusiness : IBaseBusiness<Student>
 
                 //Step 3
                 // Create a SQL command to select data from the table
-                string query = $"SELECT Id,FirstName, LastName, PhoneNumber, NationalCode FROM {tableName}";
+                string query = $"select U.FirstName,U.LastName,U.NationalCode,U.PhoneNumber,S.Id  from dbo.[User] as U INNER JOIN dbo.Student as s ON U.Id = s.UserId";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 //sTEP 4
@@ -112,6 +111,49 @@ public class StudentBusiness : IBaseBusiness<Student>
     public List<Student> GetAll()
     {
         return GetAll(firstName: null, lastname: null);
+    }
+
+    public List<StudentCourse> GetRegisteredStudent()
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool Register(StudentCourse item)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            bool isAffected = false;
+            try
+            {
+                connection.Open();
+                string tableName = "[StudentCourse]";
+
+                // Create a SQL command to insert a new person record
+                string query = $"INSERT INTO {tableName} (CourseId,StudentId,CurrentAmount) " +
+                               "VALUES (@CourseId, @StudentId, @CurrentAmount)";
+                SqlCommand command = new SqlCommand(query, connection);
+
+                // Add parameters to the SQL command
+                //command.Parameters.AddWithValue("@Id", person.Id);
+                command.Parameters.AddWithValue("@CourseId", item.CourseId);
+                command.Parameters.AddWithValue("@StudentId", item.StudentId);
+                command.Parameters.AddWithValue("@CurrentAmount", item.CurrentAmount);
+
+                // Execute the insert query
+                int rowsAffected = command.ExecuteNonQuery();
+
+                isAffected = rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error: {ex.Message}");
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return isAffected;
+        }
     }
 
     public bool Update(Student item)
