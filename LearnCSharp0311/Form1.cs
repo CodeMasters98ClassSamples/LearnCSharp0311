@@ -70,7 +70,7 @@ namespace LearnCSharp0311
             }
             StudentCourse studentCourse = new StudentCourse();
             Student student = new Student(firstName: firstNameTextBox.Text, lastName: lastNameTextBox.Text, mobileNumber: mobileNumberTextBox.Text);
-            studentBusiness.Add(student);
+            studentBusiness.AddWithSp(student);
 
 
 

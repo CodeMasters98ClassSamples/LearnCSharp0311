@@ -2,6 +2,7 @@
 using BaseBackend.Interfaces;
 using System;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace BaseBackend.Businesses;
@@ -54,6 +55,27 @@ public class StudentBusiness : IBaseBusiness<Student>, IStudentBusiness<StudentC
         }
     }
 
+    public bool AddWithSp(Student item)
+    {
+        using (SqlConnection connection = new SqlConnection(connectionString))
+        {
+            connection.Open();
+            using (SqlCommand command = new SqlCommand("AddStudent", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                // Add parameters
+                command.Parameters.Add(new SqlParameter("@FirstName", SqlDbType.NVarChar, 150)).Value = item.FirstName;
+                command.Parameters.Add(new SqlParameter("@LastName", SqlDbType.NVarChar, 150)).Value = item.LastName;
+                command.Parameters.Add(new SqlParameter("@PhoneNumber", SqlDbType.NVarChar, 11)).Value = item.MobileNumber;
+                command.Parameters.Add(new SqlParameter("@Referer", SqlDbType.NVarChar, 150)).Value = "asudhas";
+                command.Parameters.Add(new SqlParameter("@University", SqlDbType.NVarChar, 150)).Value = "asdsa";
+                // Execute the stored procedure
+                command.ExecuteNonQuery();
+            }
+        }
+        return true;
+    }
+
     public List<Student> GetAll(string firstName, string lastname)
     {
         //Step 1
@@ -69,7 +91,7 @@ public class StudentBusiness : IBaseBusiness<Student>, IStudentBusiness<StudentC
 
                 //Step 3
                 // Create a SQL command to select data from the table
-                string query = $"select U.FirstName,U.LastName,U.NationalCode,U.PhoneNumber,S.Id  from dbo.[User] as U INNER JOIN dbo.Student as s ON U.Id = s.UserId";
+                string query = $"select U.FirstName,U.LastName,U.NationalCode,U.PhoneNumber,S.Id  from dbo.[User] as U LEFT JOIN dbo.Student as s ON U.Id = s.UserId";
                 SqlCommand command = new SqlCommand(query, connection);
 
                 //sTEP 4
